@@ -1,5 +1,5 @@
 //https://leetcode.com/problems/maximum-product-subarray/
-
+//O(n) solution is to maintain a max and a min product that end at the current index, and update with each iteration
 class MaxProductSubArray {
     public int maxProduct(int[] nums) {
         if (nums.length == 1)
@@ -7,7 +7,6 @@ class MaxProductSubArray {
 
         int maxEndingHere = 1;
         int minEndingHere = 1;
-        boolean maxGreaterThan0 = true;
         int max = Integer.MIN_VALUE;
         for (int i : nums) {
             int temp = maxEndingHere;
