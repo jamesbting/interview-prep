@@ -4,8 +4,9 @@
 //Make 2 boolean matrices, and set to true if water can flow. If the element at i,j for the pacific ocean and the atlantic ocean are true, then add to (i,j) list
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
-class Solution {
+class PacificAtlanticWaterflow {
     static int[] dX = { -1, 1, 0, 0 };
     static int[] dY = { 0, 0, 1, -1 };
 
