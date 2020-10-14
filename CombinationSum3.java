@@ -15,17 +15,19 @@ class combinationSum3Decreasing {
     }
 
     private void helper(int k, int n, int start, List<List<Integer>> result, List<Integer> list) {
+        // valid combination condition
         if (k == 0 && n == 0) {
             result.add(new ArrayList<Integer>(list));
         }
 
+        // make sure inputs are still valid
         if (n <= 0 || start <= 0)
             return;
 
         for (int i = Math.min(9, start); i > 0; i--) {
             list.add(i);
-            helper(k - 1, n - i, i - 1, result, list);
-            list.remove(list.size() - 1);
+            helper(k - 1, n - i, i - 1, result, list); // recurse
+            list.remove(list.size() - 1); // backtrack to remove last element
         }
     }
 }
