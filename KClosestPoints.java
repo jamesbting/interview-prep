@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class KClosestPoints {
     public int[][] kClosest(int[][] points, int K) {
         if (points.length == K)

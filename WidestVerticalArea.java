@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class WidestVerticalArea {
     public int maxWidthOfVerticalArea(int[][] points) {
         int maxWidth = Integer.MIN_VALUE;

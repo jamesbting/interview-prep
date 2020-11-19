@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class CountSortedVowelStrings {
     private static final char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
     private static final int empty = -1;
