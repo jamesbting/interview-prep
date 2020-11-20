@@ -1,4 +1,6 @@
-private class MergeIntervals {
+import java.util.*;
+
+public class MergeIntervals {
     public int[][] merge(int[][] intervals) {
         // sort intervals by starting time
         Arrays.sort(intervals, new Comparator<int[]>() {
