@@ -7,7 +7,7 @@ public class AllOnesKLengthApart {
                 int j = i + 1;
                 while (j < nums.length && nums[j] == 0)
                     j++;
-                if (j < nums.length && j - i - 1 < k)
+                if (j < nums.length && (j - i - 1) < k)
                     return false;
             }
         }
