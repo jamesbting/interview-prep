@@ -7,62 +7,54 @@ import java.util.List;
 import java.util.Arrays;
 
 class PacificAtlanticWaterflow {
-    static int[] dX = { -1, 1, 0, 0 };
-    static int[] dY = { 0, 0, 1, -1 };
+    class Solution {
+        private static int[][] dir = { { -1, 0 }, { 1, 0 }, { 0, 1 }, { 0, -1 } };
 
-    public List<List<Integer>> pacificAtlantic(int[][] matrix) {
-        List<List<Integer>> res = new ArrayList<>();
+        public List<List<Integer>> pacificAtlantic(int[][] matrix) {
+            int m = matrix.length;
+            int n = m == 0 ? 0 : matrix[0].length;
+            boolean[][] pacific = new boolean[m][n];
+            boolean[][] atlantic = new boolean[m][n];
 
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
+            for (int i = 0; i < n; i++) {
+                dfs(matrix, 0, i, pacific);
+                dfs(matrix, m - 1, i, atlantic);
+            }
+
+            for (int i = 0; i < m; i++) {
+                dfs(matrix, i, 0, pacific);
+                dfs(matrix, i, n - 1, atlantic);
+            }
+
+            List<List<Integer>> res = new ArrayList<>();
+            for (int i = 0; i < m; i++)
+                for (int j = 0; j < n; j++)
+                    if (pacific[i][j] && atlantic[i][j])
+                        res.add(Arrays.asList(i, j));
+
             return res;
-        int m = matrix.length;
-        int n = matrix[0].length;
-        boolean[][] pacific = new boolean[m][n];
-        boolean[][] atlantic = new boolean[m][n];
-
-        // first column of pacific and last column of atlantic set to true
-        for (int i = 0; i < m; i++) {
-            pacific[i][0] = true;
-            atlantic[i][n - 1] = true;
         }
 
-        // first row of pacific and last row of atlantic to true
-        for (int j = 0; j < n; j++) {
-            pacific[0][j] = true;
-            atlantic[m - 1][j] = true;
-        }
-
-        // DFS on the first column of pacific, and the last column of atlantic
-        for (int i = 0; i < m; i++) {
-            explore(pacific, matrix, i, 0);
-            explore(atlantic, matrix, i, n - 1);
-        }
-
-        // DFS on the row of pacific and the last row of atlantic
-        for (int j = 0; j < n; j++) {
-            explore(pacific, matrix, 0, j);
-            explore(atlantic, matrix, m - 1, j);
-
-        }
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (pacific[i][j] && atlantic[i][j]) {
-                    res.add(Arrays.asList(i, j));
+        private void dfs(int[][] matrix, int row, int col, boolean[][] visited) {
+            visited[row][col] = true;
+            for (int[] delta : dir) {
+                int x = row + delta[0];
+                int y = col + delta[1];
+                if (isValid(x, y, visited) && matrix[row][col] <= matrix[x][y]) {
+                    dfs(matrix, x, y, visited);
                 }
             }
         }
-        return res;
-    }
 
-    private void explore(boolean[][] grid, int[][] matrix, int i, int j) {
-        grid[i][j] = true;
-        for (int d = 0; d < dX.length; d++) {
-            if (i + dY[d] < grid.length && i + dY[d] >= 0 && j + dX[d] < grid[0].length && j + dX[d] >= 0) {
-                if (!grid[i + dY[d]][j + dX[d]] && matrix[i + dY[d]][j + dX[d]] >= matrix[i][j]) {
-                    explore(grid, matrix, i + dY[d], j + dX[d]);
-                }
-            }
+        private boolean isValid(int row, int col, boolean[][] visited) {
+            return 0 <= row && row < visited.length && 0 <= col && col < visited[0].length && !visited[row][col];
         }
     }
+
+    /*
+     * Pacific ~ ~ ~ ~ ~ ~ 1 2 2 3 (5) * ~ 3 2 3 (4) (4) * ~ 2 4 (5) 3 1 * ~ (6) (7)
+     * 1 4 5 * ~ (5) 1 1 2 4 * * * * * Atlantic [[f,f,f,f,f],[],[],[],[]]
+     * 
+     * 
+     */
 }
