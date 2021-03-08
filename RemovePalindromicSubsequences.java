@@ -1,8 +1,9 @@
+// https://leetcode.com/problems/remove-palindromic-subsequences/
 public class removePalindromeSubsequences {
     public int removePalindromeSub(String s) {
         if(s.length() == 1 || s.length() == 0) return s.length();
-        if(isPalindrome(s)) return 1;
-        return 2;
+        if(isPalindrome(s)) return 1; // remove the entire string
+        return 2; // can always just remove all the a's then all the b's if not a palindrome itself
     }
     private boolean isPalindrome(String s) {
         int i = 0;
@@ -13,6 +14,7 @@ public class removePalindromeSubsequences {
             j--;
         }
         return true;
+
     }
 
     public int removePalindromeSubOneLine(String s) {
