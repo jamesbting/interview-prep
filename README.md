@@ -1,0 +1,1 @@
+Small repository to store my leetcode practice and solutions
