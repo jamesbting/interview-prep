@@ -1,1 +1,1 @@
-Small repository to store my leetcode practice and solutions
+A small repository to store leetcode problems, solutions and also system design and white boards
